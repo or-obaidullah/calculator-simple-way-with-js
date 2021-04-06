@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>A simple Calculator</title>
+    <style>
+        .calculator {
+            width: 320px;
+            height: 520px;
+            background: #eaedef;
+            margin: 0 auto;
+            position: relative;
+            top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            overflow: hidden;
+        }
+
+        #result {
+            height: 120px;
+            border-radius: 5px;
+            border: 1px solid rgb(192 190 190 / 47%);
+            background: #f0f8ffe6;
+        }
+
+        #history {
+            text-align: right;
+            height: 20px;
+            margin: 0 20px;
+            padding-top: 20px;
+            font-size: 15px;
+            color: #919191;
+        }
+
+        #output {
+            text-align: right;
+            height: 60px;
+            margin: 10px 20px;
+            font-size: 30px;
+        }
+
+        #keyboard {
+            height: 400px;
+        }
+
+        .operator,
+        .number,
+        .empty {
+            height: 50px;
+            width: 50px;
+            margin: 15px;
+            float: left;
+            font-size: 17px;
+            font-weight: 700;
+            border-radius: 50%;
+            border-width: 0;
+            background-color: rgba(0, 0, 0, 0.1);
+            outline: 0;
+        }
+
+        .number,
+        .empty {
+            background: #eaedef;
+        }
+
+        .operator,
+        .number {
+            cursor: pointer;
+        }
+
+        .operator:active,
+        .number:active {
+            font-size: 14px;
+        }
+
+        button:nth-child(4) {
+            font-size: 20px;
+            background: #20b2aa;
+        }
+
+        button:nth-child(8) {
+            font-size: 20px;
+            background: #ffa500;
+        }
+
+        button:nth-child(12) {
+            font-size: 20px;
+            background: #f08080;
+        }
+
+        button:nth-child(16) {
+            font-size: 20px;
+            background: #7d93e0;
+        }
+
+        button:nth-child(20) {
+            font-size: 20px;
+            background: #9477af;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="calculator">
+        <div id="result">
+            <div id="history">
+                <p id="history-value"></p>
+            </div>
+            <div id="output">
+                <p id="output-value"></p>
+            </div>
+        </div>
+
+        <div id="keyboard">
+            <button class="operator" id="clear" onclick="clearOutput()">C</button>
+            <button class="operator" id="backspace" onclick="clearOneByOne()">CE</button>
+            <button class="operator" onclick="calculate(this.id)" id="%">%</button>
+            <button class="operator" onclick="calculate(this.id)" id="/">&#247;</button>
+
+            <button class="number" onclick="calculate(this.id)" id="7">7</button>
+            <button class="number" onclick="calculate(this.id)" id="8">8</button>
+            <button class="number" onclick="calculate(this.id)" id="9">9</button>
+            <button class="operator" onclick="calculate(this.id)" id="*">&times;</button>
+
+            <button class="number" onclick="calculate(this.id)" id="4">4</button>
+            <button class="number" onclick="calculate(this.id)" id="5">5</button>
+            <button class="number" onclick="calculate(this.id)" id="6">6</button>
+            <button class="operator" onclick="calculate(this.id)" id="-">-</button>
+
+            <button class="number" onclick="calculate(this.id)" id="1">1</button>
+            <button class="number" onclick="calculate(this.id)" id="2">2</button>
+            <button class="number" onclick="calculate(this.id)" id="3">3</button>
+            <button class="operator" onclick="calculate(this.id) " id="+">+</button>
+
+            <button class="number" onclick="calculate(this.id)" id="00">00</button>
+            <button class="number" onclick="calculate(this.id)" id="0">0</button>
+            <button class="number" onclick="calculate(this.id)" id=".">.</button>
+            <button class="operator" id="=" onclick="equal()">=</button>
+        </div>
+    </div>
+
+
+    <script>
+        function calculate(x) {
+            var printOutput = document.getElementById('output-value').innerText;
+            document.getElementById('output-value').innerText = printOutput + x;
+        }
+
+        function equal() {
+            printOutput = document.getElementById('output-value').innerText;
+            if (printOutput != "") {
+                document.getElementById('output-value').innerText = eval(printOutput);
+                document.getElementById('history-value').innerText = "";
+            }
+        }
+
+        function clearOutput() {
+            document.getElementById('output-value').innerText = null;
+        }
+
+        function clearOneByOne() {
+            var printOutput = document.getElementById('output-value').innerText;
+
+            document.getElementById('output-value').innerText = printOutput.substr(0, printOutput.length - 1);
+        }
+    </script>
+</body>
+
+</html>
